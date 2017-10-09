@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CookingHelper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="459.303" Width="670.349">
     <Grid>
-        
+        <Button x:Name="cmdNextPage" Content="Button" HorizontalAlignment="Left" Margin="524,372,0,0" VerticalAlignment="Top" Width="101" Height="27" Click="cmdNextPage_Click" />
+
     </Grid>
 </Window>

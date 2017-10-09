@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace CookingHelper
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für MainIngredient.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainIngredient : Page
     {
-        public MainWindow()
+        public MainIngredient()
         {
             InitializeComponent();
-        }
-
-        private void cmdNextPage_Click(object sender, RoutedEventArgs e)
-        {
-            Uri uri = new Uri("MainIngredient.xaml", UriKind.Relative);
-            NavigationService nav = NavigationService.GetNavigationService(this);
-            nav.Navigate(uri);
         }
     }
 }
