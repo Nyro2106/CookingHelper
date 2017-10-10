@@ -66,6 +66,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Config\Config.cs" />
     <Compile Include="Ingredients\Ingredient.cs" />
     <Compile Include="MainIngredient.xaml.cs">
       <DependentUpon>MainIngredient.xaml</DependentUpon>

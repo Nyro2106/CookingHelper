@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CookingHelper.Ingredients;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,13 +21,18 @@ namespace CookingHelper
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
     
-    public enum Ingredient
-    {
-        Steak,
-        Kürbis
-    }
+    //public enum Ingredient
+    //{
+    //    Steak,
+    //    Kürbis
+    //}
     public partial class MainWindow : Window
     {
+        List<Ingredient> meat = new List<Ingredient>();
+        List<Ingredient> vegetables = new List<Ingredient>();
+        List<Ingredient> fruit = new List<Ingredient>();
+        List<Ingredient> other = new List<Ingredient>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,30 +42,17 @@ namespace CookingHelper
 
         private void FillLists()
         {
-            Meat.Items.Add("Hühnchen");
-            Meat.Items.Add("Rind");
-            Meat.Items.Add("Schwein");
-            Meat.Items.Add("Ente");
-            Meat.Items.Add("Fisch");
-            FirstSideDish.Items.Add("Nudeln");
-            FirstSideDish.Items.Add("Reis");
-            FirstSideDish.Items.Add("CousCous");
-            FirstSideDish.Items.Add("Kartoffeln");
-            FirstSideDish.Items.Add("Naan <3");
-            SecondSideDish.Items.Add("Tomate");
-            SecondSideDish.Items.Add("Gurke");
-            SecondSideDish.Items.Add("Paprika");
-            SecondSideDish.Items.Add("Zucchini");
-            SecondSideDish.Items.Add("Zwiebeln");
-            SecondSideDish.Items.Add("Lauch");
-            FirstSideDish.Items.Add("Kürbis");
+            Ingredient.Load(Config.MeatPath, Meat, out meat, Ingredients.Type.Meat);
+            Ingredient.Load(Config.VegetablePath, Vegetables, out vegetables, Ingredients.Type.Vegetable);
+            Ingredient.Load(Config.FruitPath, Fruit, out fruit, Ingredients.Type.Fruit);
+            Ingredient.Load(Config.OtherPath, Other, out other, Ingredients.Type.Other);
         }
 
 
         private void Meat_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             CurrentIngredients.Items.Add(Meat.SelectedItem);
-            CheckReceipts(Ingredient.Steak);
+            //CheckReceipts(Ingredient.Steak);
         }
 
         private void CurrentIngredients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -71,42 +64,41 @@ namespace CookingHelper
         private void CheckReceipts()
         {
             Receipts.Items.Clear();
-
         }
 
         private void CheckReceipts(Ingredient ingredient, string[] ingredients = null)
         {
-            if (ingredient == Ingredient.Kürbis)
-            {
-                Receipts.Items.Add("Kübissuppe");
-                Receipts.Items.Add("Frittierte Kürbisstreifen");
-                Receipts.Items.Add("Naan Tortillas mit Kürbis");
-            }
-            else
-            {
-                Receipts.Items.Add("Steak mit Pommes");
-                Receipts.Items.Add("Gebackenes Steak mit Ofenkartoffeln");
-                Receipts.Items.Add("Burger");
-                Receipts.Items.Add("Spaghetti Bolognese");
-            }
-            if (CurrentIngredients.Items.Contains("Rind") && CurrentIngredients.Items.Contains("Kürbis"))
-            {
-                Receipts.Items.Clear();
-                Receipts.Items.Add("Steak mit gebackenem Kürbis");
-                Receipts.Items.Add("Hackbällchen mit Kürbisstreifen");
-            }
+            //if (ingredient == Ingredient.Kürbis)
+            //{
+            //    Receipts.Items.Add("Kübissuppe");
+            //    Receipts.Items.Add("Frittierte Kürbisstreifen");
+            //    Receipts.Items.Add("Naan Tortillas mit Kürbis");
+            //}
+            //else
+            //{
+            //    Receipts.Items.Add("Steak mit Pommes");
+            //    Receipts.Items.Add("Gebackenes Steak mit Ofenkartoffeln");
+            //    Receipts.Items.Add("Burger");
+            //    Receipts.Items.Add("Spaghetti Bolognese");
+            //}
+            //if (CurrentIngredients.Items.Contains("Rind") && CurrentIngredients.Items.Contains("Kürbis"))
+            //{
+            //    Receipts.Items.Clear();
+            //    Receipts.Items.Add("Steak mit gebackenem Kürbis");
+            //    Receipts.Items.Add("Hackbällchen mit Kürbisstreifen");
+            //}
 
         }
 
-        private void FirstSideDish_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Vegetables_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            CurrentIngredients.Items.Add(FirstSideDish.SelectedItem);
-            CheckReceipts(Ingredient.Kürbis);
+            CurrentIngredients.Items.Add(Vegetables.SelectedItem);
+            //CheckReceipts(Ingredient.Kürbis);
         }
 
         private void Receipts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            using (Process.Start(@"http://www.chefkoch.de/rezepte/259781101566295/Kuerbissuppe-mit-Ingwer-und-Kokosmilch.html")) { }
+            using (Process.Start($@"")) { }
         }
     }
 }

@@ -9,14 +9,14 @@
     <Grid>
         <Button x:Name="cmdNextPage" Content="Mahlzeit erstellen" HorizontalAlignment="Left" Margin="1256,726,0,0" VerticalAlignment="Top" Width="100" Height="26"/>
         <ListBox x:Name="Meat" HorizontalAlignment="Left" Height="312" Margin="64,90,0,0" VerticalAlignment="Top" Width="225" MouseDoubleClick="Meat_MouseDoubleClick"/>
-        <ListBox x:Name="FirstSideDish" HorizontalAlignment="Left" Height="312" Margin="312,90,0,0" VerticalAlignment="Top" Width="224" MouseDoubleClick="FirstSideDish_MouseDoubleClick"/>
-        <ListBox x:Name="SecondSideDish" HorizontalAlignment="Left" Height="312" Margin="565,90,0,0" VerticalAlignment="Top" Width="224"/>
+        <ListBox x:Name="Vegetables" HorizontalAlignment="Left" Height="312" Margin="312,90,0,0" VerticalAlignment="Top" Width="224" MouseDoubleClick="Vegetables_MouseDoubleClick"/>
+        <ListBox x:Name="Fruit" HorizontalAlignment="Left" Height="312" Margin="565,90,0,0" VerticalAlignment="Top" Width="224"/>
         <Label Content="Fleisch" HorizontalAlignment="Left" Margin="64,59,0,0" VerticalAlignment="Top"/>
         <Label Content="Gemüse" HorizontalAlignment="Left" Margin="312,59,0,0" VerticalAlignment="Top"/>
         <Label Content="Obst" HorizontalAlignment="Left" Margin="565,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.2,0.462"/>
         <ListBox x:Name="Receipts" HorizontalAlignment="Left" Height="520" Margin="1075,90,0,0" VerticalAlignment="Top" Width="250" MouseDoubleClick="Receipts_MouseDoubleClick"/>
         <Label Content="Verfügbare Rezepte" HorizontalAlignment="Left" Margin="1075,59,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="OtherIngredients" HorizontalAlignment="Left" Height="312" Margin="820,90,0,0" VerticalAlignment="Top" Width="224"/>
+        <ListBox x:Name="Other" HorizontalAlignment="Left" Height="312" Margin="820,90,0,0" VerticalAlignment="Top" Width="224"/>
         <Label Content="Sonstiges" HorizontalAlignment="Left" Margin="820,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.2,0.462"/>
         <ListBox x:Name="CurrentIngredients" HorizontalAlignment="Left" Height="170" Margin="64,496,0,0" VerticalAlignment="Top" Width="405" MouseDoubleClick="CurrentIngredients_MouseDoubleClick"/>
         <Label Content="Zutaten" HorizontalAlignment="Left" Margin="64,465,0,0" VerticalAlignment="Top"/>
