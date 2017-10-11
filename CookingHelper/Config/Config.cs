@@ -8,9 +8,20 @@ namespace CookingHelper
 {
     class Config
     {
-        static public string MeatPath { get; set; } = @"E:\Git\CookingData\Ingredients\Meat.txt";
-        static public string VegetablePath { get; set; } = @"E:\Git\CookingData\Ingredients\Vegetables.txt";
-        static public string FruitPath { get; set; } = @"E:\Git\CookingData\Ingredients\Fruits.txt";
-        static public string OtherPath { get; set; } = @"E:\Git\CookingData\Ingredients\Other.txt";
+        static public string DatabasePath { get; set; } = @"E:\Git\CookingData";
+        static public string MeatPath { get; set; } = $@"{DatabasePath}\Ingredients\Meat.txt";
+        static public string VegetablePath { get; set; } = $@"{DatabasePath}\Ingredients\Vegetables.txt";
+        static public string FruitPath { get; set; } = $@"{DatabasePath}\Ingredients\Fruits.txt";
+        static public string OtherPath { get; set; } = $@"{DatabasePath}\Ingredients\Other.txt";
+
+        public static void ChangeDatabasePath(string newPath)
+        {
+            ///TODO
+            ///Laden/Speichern implementieren
+            ///
+            DatabasePath = newPath;
+        }
+
+        
     }
 }

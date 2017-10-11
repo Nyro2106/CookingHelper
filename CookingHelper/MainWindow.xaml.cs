@@ -28,10 +28,13 @@ namespace CookingHelper
     //}
     public partial class MainWindow : Window
     {
+
         List<Ingredient> meat = new List<Ingredient>();
         List<Ingredient> vegetables = new List<Ingredient>();
         List<Ingredient> fruit = new List<Ingredient>();
         List<Ingredient> other = new List<Ingredient>();
+
+
 
         public MainWindow()
         {
@@ -53,6 +56,22 @@ namespace CookingHelper
         {
             CurrentIngredients.Items.Add(Meat.SelectedItem);
             //CheckReceipts(Ingredient.Steak);
+        }
+
+        private void Vegetables_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            CurrentIngredients.Items.Add(Vegetables.SelectedItem);
+            //CheckReceipts(Ingredient.Kürbis);
+        }
+
+        private void Fruit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            CurrentIngredients.Items.Add(Fruit.SelectedItem);
+        }
+
+        private void Other_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            CurrentIngredients.Items.Add(Other.SelectedItem);
         }
 
         private void CurrentIngredients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -90,15 +109,35 @@ namespace CookingHelper
 
         }
 
-        private void Vegetables_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            CurrentIngredients.Items.Add(Vegetables.SelectedItem);
-            //CheckReceipts(Ingredient.Kürbis);
-        }
-
         private void Receipts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            ///TODO
+            ///Logic zum Öffnen von Rezepten hinzufügen
             using (Process.Start($@"")) { }
         }
+
+        private void IngredientsMenuItemRemoveAll_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            CurrentIngredients.Items.Clear();
+        }
+
+        private void IngredientsMenuItemImageRemoveAll_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            CurrentIngredients.Items.Clear();
+        }
+
+        private void HeaderOptions_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OptionWindow window = new OptionWindow(Config.DatabasePath);
+            window.Show();
+        }
+
+        private void HeaderImageOptions_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            OptionWindow window = new OptionWindow(Config.DatabasePath);
+            window.Show();
+        }
+
+
     }
 }
