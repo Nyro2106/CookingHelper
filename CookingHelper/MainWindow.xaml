@@ -21,9 +21,9 @@
         <ListBox x:Name="CurrentIngredients" HorizontalAlignment="Left" Height="170" Margin="60,496,0,0" VerticalAlignment="Top" Width="409" MouseDoubleClick="CurrentIngredients_MouseDoubleClick">
             <ListBox.ContextMenu>
                 <ContextMenu StaysOpen="true">
-                    <MenuItem x:Name="IngredientsMenuItemRemoveAll" Header="Alle entfernen" MouseLeftButtonDown="IngredientsMenuItemRemoveAll_MouseLeftButtonDown" Background="#FFCFCFCF" BorderBrush="#FFB02C2C">
+                    <MenuItem x:Name="IngredientsMenuItemRemoveAll" Header="Alle entfernen" Background="#FFCFCFCF" BorderBrush="#FFB02C2C" Click="IngredientsMenuItemRemoveAll_Click" >
                         <MenuItem.Icon>
-                            <Image x:Name="IngredientsMenuItemImageRemoveAll" Source="Assets\red-x-icon-hi.png" MouseLeftButtonDown="IngredientsMenuItemImageRemoveAll_MouseLeftButtonDown"></Image>
+                            <Image x:Name="IngredientsMenuItemImageRemoveAll" Source="Assets\red-x-icon-hi.png" ></Image>
                         </MenuItem.Icon>
                     </MenuItem>
                 </ContextMenu>
@@ -34,14 +34,14 @@
         <Label Content="Zutaten" HorizontalAlignment="Left" Margin="64,465,0,0" VerticalAlignment="Top"/>
         <Menu HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="54" Background="#FF323232" BorderThickness="1" BorderBrush="#FF0080FF">
             <MenuItem Header="Datei" Height="27" Width="52" FontSize="15" Background="#FF323232" Foreground="#FFE4E4E4">
-                <MenuItem x:Name="HeaderNewReceipt" Header="Neues Rezept" Margin="0,0,0,0" Background="#FFA4A4A4" HorizontalAlignment="Right" Foreground="#FF303030" Height="28" BorderBrush="#FF1B1D1F" >
+                <MenuItem x:Name="HeaderNewReceipt" Header="Neues Rezept" Margin="0,0,0,0" Background="#FFA4A4A4" HorizontalAlignment="Right" Foreground="#FF303030" Height="28" BorderBrush="#FF1B1D1F" Click="HeaderNewReceipt_Click" >
                     <MenuItem.Icon>
                         <Image x:Name="HeaderImageNewReceipt" Source="Assets\Add.ico" Margin="0,0,-5,-2"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem x:Name="HeaderOptions" Header="Optionen" Margin="0,0,0,0" Background="#FFA4A4A4" HorizontalAlignment="Right" Foreground="#FF303030" Height="28" BorderBrush="#FF1B1D1F" MouseDown="HeaderOptions_MouseDown" Width="176" >
+                <MenuItem x:Name="HeaderOptions" Header="Optionen" Margin="0,0,0,0" Background="#FFA4A4A4" HorizontalAlignment="Right" Foreground="#FF303030" Height="28" BorderBrush="#FF1B1D1F" Width="176" Click="HeaderOptions_Click"  >
                     <MenuItem.Icon>
-                        <Image x:Name="HeaderImageOptions" Source="Assets/options.png" MouseLeftButtonDown="HeaderImageOptions_MouseLeftButtonDown" Margin="0,0,-7,-2" />
+                        <Image x:Name="HeaderImageOptions" Source="Assets/options.png" Margin="0,0,-7,-2" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>

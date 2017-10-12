@@ -20,7 +20,7 @@ namespace CookingHelper
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-    
+
     //public enum Ingredient
     //{
     //    Steak,
@@ -28,54 +28,80 @@ namespace CookingHelper
     //}
     public partial class MainWindow : Window
     {
-
-        List<Ingredient> meat = new List<Ingredient>();
-        List<Ingredient> vegetables = new List<Ingredient>();
-        List<Ingredient> fruit = new List<Ingredient>();
-        List<Ingredient> other = new List<Ingredient>();
-
+        List<Receipt> ReceiptList = new List<Receipt>();
 
 
         public MainWindow()
         {
             InitializeComponent();
-            WindowStartupLocation =  WindowStartupLocation.CenterScreen;
-            FillLists();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+
+
+            FillIngredients();
         }
 
-        private void FillLists()
+        private void FillIngredients()
         {
-            Ingredient.Load(Config.MeatPath, Meat, out meat, Ingredients.Type.Meat);
-            Ingredient.Load(Config.VegetablePath, Vegetables, out vegetables, Ingredients.Type.Vegetable);
-            Ingredient.Load(Config.FruitPath, Fruit, out fruit, Ingredients.Type.Fruit);
-            Ingredient.Load(Config.OtherPath, Other, out other, Ingredients.Type.Other);
+            Receipt.GetReceipts(ReceiptList);
+            Receipt.FillLists(ReceiptList, Meat, Vegetables, Fruit, Other);
         }
 
+        private void AddIngredient(ListBox ingredientList)
+        {
+            if (CurrentIngredients.Items.Contains(ingredientList.SelectedItem))
+            {
+                return;
+            }
+            else
+            {
+                CurrentIngredients.Items.Add(ingredientList.SelectedItem);
+                CheckReceipts();
+            }
+        }
 
         private void Meat_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            CurrentIngredients.Items.Add(Meat.SelectedItem);
-            //CheckReceipts(Ingredient.Steak);
+            if (Meat.Items.Count == 0)
+            {
+                return;
+            }
+            AddIngredient(Meat);
         }
 
         private void Vegetables_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            CurrentIngredients.Items.Add(Vegetables.SelectedItem);
-            //CheckReceipts(Ingredient.Kürbis);
+            if (Vegetables.Items.Count == 0)
+            {
+                return;
+            }
+            AddIngredient(Vegetables);
         }
 
         private void Fruit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            CurrentIngredients.Items.Add(Fruit.SelectedItem);
+            if (Fruit.Items.Count == 0)
+            {
+                return;
+            }
+            AddIngredient(Fruit);
         }
 
         private void Other_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            CurrentIngredients.Items.Add(Other.SelectedItem);
+            if (Other.Items.Count == 0)
+            {
+                return;
+            }
+            AddIngredient(Other);
         }
 
         private void CurrentIngredients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (CurrentIngredients.Items.Count == 0)
+            {
+                return;
+            }
             CurrentIngredients.Items.Remove(CurrentIngredients.SelectedItem);
             CheckReceipts();
         }
@@ -83,61 +109,45 @@ namespace CookingHelper
         private void CheckReceipts()
         {
             Receipts.Items.Clear();
-        }
-
-        private void CheckReceipts(Ingredient ingredient, string[] ingredients = null)
-        {
-            //if (ingredient == Ingredient.Kürbis)
-            //{
-            //    Receipts.Items.Add("Kübissuppe");
-            //    Receipts.Items.Add("Frittierte Kürbisstreifen");
-            //    Receipts.Items.Add("Naan Tortillas mit Kürbis");
-            //}
-            //else
-            //{
-            //    Receipts.Items.Add("Steak mit Pommes");
-            //    Receipts.Items.Add("Gebackenes Steak mit Ofenkartoffeln");
-            //    Receipts.Items.Add("Burger");
-            //    Receipts.Items.Add("Spaghetti Bolognese");
-            //}
-            //if (CurrentIngredients.Items.Contains("Rind") && CurrentIngredients.Items.Contains("Kürbis"))
-            //{
-            //    Receipts.Items.Clear();
-            //    Receipts.Items.Add("Steak mit gebackenem Kürbis");
-            //    Receipts.Items.Add("Hackbällchen mit Kürbisstreifen");
-            //}
-
+            if (CurrentIngredients.Items.Count == 0)
+            {
+                Receipts.Items.Clear();
+                return;
+            }
+            Receipt.CheckForReceipts(ReceiptList, Receipts, CurrentIngredients);
         }
 
         private void Receipts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ///TODO
-            ///Logic zum Öffnen von Rezepten hinzufügen
-            using (Process.Start($@"")) { }
+            if (Receipts.Items.Count == 0)
+            {
+                return;
+            }
+            try
+            {
+                Receipt.Open(ReceiptList, Receipts.SelectedItem.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
         }
 
-        private void IngredientsMenuItemRemoveAll_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void IngredientsMenuItemRemoveAll_Click(object sender, RoutedEventArgs e)
         {
             CurrentIngredients.Items.Clear();
+            CheckReceipts();
         }
 
-        private void IngredientsMenuItemImageRemoveAll_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            CurrentIngredients.Items.Clear();
-        }
-
-        private void HeaderOptions_MouseDown(object sender, MouseButtonEventArgs e)
+        private void HeaderOptions_Click(object sender, RoutedEventArgs e)
         {
             OptionWindow window = new OptionWindow(Config.DatabasePath);
             window.Show();
         }
 
-        private void HeaderImageOptions_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void HeaderNewReceipt_Click(object sender, RoutedEventArgs e)
         {
-            OptionWindow window = new OptionWindow(Config.DatabasePath);
-            window.Show();
+
         }
-
-
     }
 }

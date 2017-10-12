@@ -8,23 +8,17 @@ using System.Windows.Controls;
 
 namespace CookingHelper.Ingredients
 {
-    enum Type
-    {
-        Meat, Vegetable, Fruit, Other
-    }
+
     class Ingredient
     {
         public string Name { get; set; }
-        public int Price { get; set; }
-        public Type Type { get; set; }
 
-        public Ingredient(string name, Type type)
+        public Ingredient(string name)
         {
             this.Name = name;
-            this.Type = type;
         }
 
-        public static void Load(string path, ListBox listBox, out List<Ingredient> ingredients, Type ingredientType)
+        public static void Load(string path, ListBox listBox, out List<Ingredient> ingredients)
         {
             List<string> tempList = new List<string>();
             List<Ingredient> tempListAdvanced = new List<Ingredient>();
@@ -40,7 +34,7 @@ namespace CookingHelper.Ingredients
             tempList.Sort();
             foreach (var name in tempList)
             {
-                tempListAdvanced.Add(new Ingredient(name, ingredientType));
+                tempListAdvanced.Add(new Ingredient(name));
             }
             ingredients = tempListAdvanced;
             foreach (var ingredient in tempListAdvanced)
@@ -48,5 +42,7 @@ namespace CookingHelper.Ingredients
                 listBox.Items.Add(ingredient.Name);
             }
         }
+
+
     }
 }
