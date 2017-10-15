@@ -1,0 +1,17 @@
+Apfel=Fruit
+Mehl=Other
+Eier=Other
+Milch=Other
+
+Apfelkuchenrezept
+
+Hier steht das Rezept für einen köstlichen Apfelkuchen, zuerst muss man..
+
+Zutaten
+
+400 Äpfel
+500g Mehl
+6 Eier
+250ml Milch
+1 Tasse Liebe
+Eine Prise Lompf
