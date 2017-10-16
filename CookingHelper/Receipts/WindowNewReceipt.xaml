@@ -1,0 +1,31 @@
+﻿<Window x:Class="CookingHelper.WindowNewReceipt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CookingHelper"
+        mc:Ignorable="d"
+        Title="Neues Rezept" Height="442.929" Width="362.143" Icon="/CookingHelper;component/Assets/Add.ico" BorderThickness="1">
+    <Grid Background="#FF323232">
+        <Button x:Name="CmdSave" Content="Speichern" HorizontalAlignment="Left" Margin="25,366,0,0" VerticalAlignment="Top" Width="75" Click="CmdSave_Click"/>
+        <Button x:Name="CmdClose" Content="Abbrechen" HorizontalAlignment="Left" Margin="256,366,0,0" VerticalAlignment="Top" Width="74" Click="CmdClose_Click"/>
+        <ListBox HorizontalAlignment="Left" Height="164" Margin="10,184,0,0" VerticalAlignment="Top" Width="134"/>
+        <Label Content="Zutaten" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtReceiptName"  HorizontalAlignment="Left" Height="22" Margin="10,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="290"/>
+        <TextBox x:Name="TxtIngredientName"  HorizontalAlignment="Left" Height="22" Margin="10,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboBoxIngredientType" HorizontalAlignment="Left" Margin="188,124,0,0" VerticalAlignment="Top" Width="120" BorderThickness="1">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                    <GradientStop Color="#FFA2A2A2" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+            <ComboBox.Effect>
+                <DropShadowEffect/>
+            </ComboBox.Effect>
+        </ComboBox>
+        <Label Content="Zutatenname" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top"/>
+        <Label Content="Rezeptname" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
+        <Label Content="Zutatenart" HorizontalAlignment="Left" Margin="188,95,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CookingHelper"
         mc:Ignorable="d"
-        Title="OptionWindow" Height="468" Width="519" Background="#FF323232">
+        Title="Optionen" Height="468" Width="519" Background="#FF323232" BorderThickness="1">
     <Grid>
-        <TextBox x:Name="txtPathToDatabase" HorizontalAlignment="Left" Height="23" Margin="30,63,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="410" KeyDown="txtPathToDatabase_KeyDown"/>
+        <TextBox x:Name="TxtPathToDatabase" HorizontalAlignment="Left" Height="23" Margin="30,63,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="410" KeyDown="TxtPathToDatabase_KeyDown"/>
         <Label Content="Pfad für die Datenbank" HorizontalAlignment="Left" Margin="30,32,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="cmdSave" Content="Speichern" HorizontalAlignment="Left" Margin="16,399,0,0" VerticalAlignment="Top" Width="74" Click="cmdSave_Click"/>
-        <Button x:Name="cmdClose" Content="Abbrechen" HorizontalAlignment="Left" Margin="384,399,0,0" VerticalAlignment="Top" Width="75" Click="cmdClose_Click"/>
+        <Button x:Name="CmdSave" Content="Speichern" HorizontalAlignment="Left" Margin="16,399,0,0" VerticalAlignment="Top" Width="74" Click="CmdSave_Click"/>
+        <Button x:Name="CmdClose" Content="Abbrechen" HorizontalAlignment="Left" Margin="384,399,0,0" VerticalAlignment="Top" Width="75" Click="CmdClose_Click"/>
+        <Image x:Name="OpenFileDialogeImage" HorizontalAlignment="Left" Height="34" Margin="445,58,0,0" VerticalAlignment="Top" Width="36" Source="/CookingHelper;component/Assets/Folder.ico" MouseDown="OpenFileDialogeImage_MouseDown">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+        </Image>
 
     </Grid>
 </Window>

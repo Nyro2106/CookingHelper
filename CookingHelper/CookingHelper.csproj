@@ -37,6 +37,7 @@
     <ApplicationIcon>cooking_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -57,11 +58,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Receipts\CookBook.cs" />
     <Compile Include="Receipts\Receipt.cs" />
-    <Page Include="MainIngredient.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="Receipts\WindowNewReceipt.xaml.cs">
+      <DependentUpon>WindowNewReceipt.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,14 +73,15 @@
     </Compile>
     <Compile Include="Config\Config.cs" />
     <Compile Include="Ingredients\Ingredient.cs" />
-    <Compile Include="MainIngredient.xaml.cs">
-      <DependentUpon>MainIngredient.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Options\OptionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Receipts\WindowNewReceipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,6 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Folder.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

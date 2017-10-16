@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,24 +21,29 @@ namespace CookingHelper
     /// </summary>
     public partial class OptionWindow : Window
     {
-        public OptionWindow(string databasePath)
+        public MainWindow TempWindow { get; set; }
+
+        public OptionWindow(string databasePath, MainWindow mainWindow)
         {
             InitializeComponent();
-            txtPathToDatabase.Text = databasePath;
+            TxtPathToDatabase.Text = databasePath;
+            TempWindow = mainWindow;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
-        private void cmdSave_Click(object sender, RoutedEventArgs e)
+        private void CmdSave_Click(object sender, RoutedEventArgs e)
         {
-            Config.ChangeDatabasePath(txtPathToDatabase.Text);
+            Config.ChangeDatabasePath(TxtPathToDatabase.Text);
+            TempWindow.FillIngredients();
             this.Close();
         }
 
-        private void cmdClose_Click(object sender, RoutedEventArgs e)
+        private void CmdClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void txtPathToDatabase_KeyDown(object sender, KeyEventArgs e)
+        private void TxtPathToDatabase_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter)
             {
@@ -44,8 +51,21 @@ namespace CookingHelper
             }
             else
             {
-                Config.ChangeDatabasePath(txtPathToDatabase.Text);
+                Config.ChangeDatabasePath(TxtPathToDatabase.Text);
                 this.Close();
+            }
+        }
+
+        
+        private void OpenFileDialogeImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Bitte Datenbankdatei auswählen"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                TxtPathToDatabase.Text = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
             }
         }
     }

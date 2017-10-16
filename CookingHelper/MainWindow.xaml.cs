@@ -28,104 +28,138 @@ namespace CookingHelper
     //}
     public partial class MainWindow : Window
     {
-        List<Receipt> ReceiptList = new List<Receipt>();
+        List<Receipt> receiptList = new List<Receipt>();
+        bool isFirstStart = Config.IsFirstStart();
 
 
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-
+            LoadConfig(isFirstStart);
 
             FillIngredients();
         }
 
-        private void FillIngredients()
+        private void LoadConfig(bool isFirstStart)
         {
-            Receipt.GetReceipts(ReceiptList);
-            Receipt.FillLists(ReceiptList, Meat, Vegetables, Fruit, Other);
+            if (isFirstStart)
+            {
+                Config.CreateConfigFolder();
+                Config.Save();
+                MessageBox.Show($"Konfiguration wurde unter {Config.ConfigPath} gespeichert");
+            }
+            else
+            {
+                Config.Load(Config.ConfigPath);
+            }
+        }
+
+        internal void ClearListBoxes()
+        {
+            foreach (var child in MainGrid.Children)
+            {
+                if (child is ListBox listBox)
+                {
+                    listBox.Items.Clear();
+                }
+            }
+        }
+
+        internal void FillIngredients()
+        {
+            ClearListBoxes();
+            try
+            {
+                CookBook.GetReceipts(receiptList);
+                CookBook.FillLists(receiptList, ListMeat, ListVegetables, ListFruit, ListOther);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Konnte Rezepte nicht laden, bitte Datenbank-Pfad in den Optionen überprüfen. {ex.Message}");
+                ClearListBoxes();
+            }
         }
 
         private void AddIngredient(ListBox ingredientList)
         {
-            if (CurrentIngredients.Items.Contains(ingredientList.SelectedItem))
+            if (ListCurrentIngredients.Items.Contains(ingredientList.SelectedItem))
             {
                 return;
             }
             else
             {
-                CurrentIngredients.Items.Add(ingredientList.SelectedItem);
+                ListCurrentIngredients.Items.Add(ingredientList.SelectedItem);
                 CheckReceipts();
             }
         }
 
         private void Meat_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (Meat.Items.Count == 0)
+            if (ListMeat.Items.Count == 0)
             {
                 return;
             }
-            AddIngredient(Meat);
+            AddIngredient(ListMeat);
         }
 
         private void Vegetables_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (Vegetables.Items.Count == 0)
+            if (ListVegetables.Items.Count == 0)
             {
                 return;
             }
-            AddIngredient(Vegetables);
+            AddIngredient(ListVegetables);
         }
 
         private void Fruit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (Fruit.Items.Count == 0)
+            if (ListFruit.Items.Count == 0)
             {
                 return;
             }
-            AddIngredient(Fruit);
+            AddIngredient(ListFruit);
         }
 
         private void Other_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (Other.Items.Count == 0)
+            if (ListOther.Items.Count == 0)
             {
                 return;
             }
-            AddIngredient(Other);
+            AddIngredient(ListOther);
         }
 
         private void CurrentIngredients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (CurrentIngredients.Items.Count == 0)
+            if (ListCurrentIngredients.Items.Count == 0)
             {
                 return;
             }
-            CurrentIngredients.Items.Remove(CurrentIngredients.SelectedItem);
+            ListCurrentIngredients.Items.Remove(ListCurrentIngredients.SelectedItem);
             CheckReceipts();
         }
 
         private void CheckReceipts()
         {
-            Receipts.Items.Clear();
-            if (CurrentIngredients.Items.Count == 0)
+            ListReceipts.Items.Clear();
+            if (ListCurrentIngredients.Items.Count == 0)
             {
-                Receipts.Items.Clear();
+                ListReceipts.Items.Clear();
                 return;
             }
-            Receipt.CheckForReceipts(ReceiptList, Receipts, CurrentIngredients);
+            CookBook.CheckForReceipts(receiptList, ListReceipts, ListCurrentIngredients);
         }
 
         private void Receipts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (Receipts.Items.Count == 0)
+            if (ListReceipts.Items.Count == 0)
             {
                 return;
             }
             try
             {
-                Receipt.Open(ReceiptList, Receipts.SelectedItem.ToString());
+                CookBook.Open(ListReceipts.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -135,19 +169,20 @@ namespace CookingHelper
 
         private void IngredientsMenuItemRemoveAll_Click(object sender, RoutedEventArgs e)
         {
-            CurrentIngredients.Items.Clear();
+            ListCurrentIngredients.Items.Clear();
             CheckReceipts();
         }
 
         private void HeaderOptions_Click(object sender, RoutedEventArgs e)
         {
-            OptionWindow window = new OptionWindow(Config.DatabasePath);
+            OptionWindow window = new OptionWindow(Config.DatabasePath, this);
             window.Show();
         }
 
         private void HeaderNewReceipt_Click(object sender, RoutedEventArgs e)
         {
-
+            WindowNewReceipt window = new WindowNewReceipt();
+            window.Show();
         }
     }
 }
