@@ -181,7 +181,7 @@ namespace CookingHelper
 
         private void HeaderNewReceipt_Click(object sender, RoutedEventArgs e)
         {
-            WindowNewReceipt window = new WindowNewReceipt();
+            WindowNewReceipt window = new WindowNewReceipt(this);
             window.Show();
         }
     }

@@ -19,30 +19,55 @@ namespace CookingHelper
     /// </summary>
     public partial class WindowNewReceipt : Window
     {
-        public WindowNewReceipt()
+        public MainWindow TempWindow { get; set; }
+        internal List<Dictionary<string, CookBook.IngredientType>> TempIngredients = new List<Dictionary<string, CookBook.IngredientType>>();
+
+        public WindowNewReceipt(MainWindow tempWindow)
         {
             InitializeComponent();
-            FillIngredientTypes();
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        }
 
-        private void FillIngredientTypes()
-        {
-            ComboBoxIngredientType.Items.Add("Meat");
-            ComboBoxIngredientType.Items.Add("Vegetable");
-            ComboBoxIngredientType.Items.Add("Fruit");
-            ComboBoxIngredientType.Items.Add("Other");
-            ComboBoxIngredientType.SelectedIndex = 0;
+            this.TempWindow = tempWindow;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void CmdSave_Click(object sender, RoutedEventArgs e)
         {
-            //Save
+            if (TxtReceiptName.Text != string.Empty)
+            {
+                TextRange range = new TextRange(RichTextReceiptContent.Document.ContentStart, RichTextReceiptContent.Document.ContentEnd);
+                string receiptContent = range.Text;
+
+                CookBook.CreateNewReceipt(TxtReceiptName.Text, receiptContent, TempIngredients);
+                TempWindow.FillIngredients();
+                this.Close(); 
+            }
+            else
+            {
+                MessageBox.Show("Bitte Rezeptnamen eingeben!");
+            }
         }
 
         private void CmdClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void TxtIngredientName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && TxtIngredientName.Text != string.Empty)
+            {
+                WindowNewReceiptIngredients window = new WindowNewReceiptIngredients(this);
+                window.Show();
+            }
+        }
+
+        private void ImageAddIngredient_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (TxtIngredientName.Text != string.Empty)
+            {
+                WindowNewReceiptIngredients window = new WindowNewReceiptIngredients(this);
+                window.Show(); 
+            }
         }
     }
 }

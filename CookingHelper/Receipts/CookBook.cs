@@ -44,6 +44,21 @@ namespace CookingHelper
             return receipts;
         }
 
+        internal static void CreateNewReceipt(string receiptName, string receiptText, List<Dictionary<string, CookBook.IngredientType>> ingredients)
+        {
+            string[] receiptPaths = Directory.GetFiles($@"{Config.DatabasePath}\Receipts");
+            using (StreamWriter writer = new StreamWriter($@"{Config.DatabasePath}\Receipts\{receiptName}.txt"))
+            {
+                foreach (var ingredient in ingredients)
+                {
+                    foreach (var ingredientKey in ingredient)
+                    {
+                        writer.WriteLine($"{ingredientKey.Key}={ingredientKey.Value}");
+                    }
+                }
+                writer.WriteLine($"\n{receiptText}");
+            }
+        }
 
         private static IngredientType GetIngredientType(string type)
         {
